@@ -63,7 +63,7 @@ class ThinPlateSpline:
         Args:
             X (Tensor): Control point at source space (X_c)
                 Shape: (n_c, d_s)
-            Y (ndarrau): Control point in the target space (X_t)
+            Y (Tensor): Control point in the target space (X_t)
                 Shape: (n_c, d_t)
 
         Returns:

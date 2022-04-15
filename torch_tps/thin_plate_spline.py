@@ -49,7 +49,7 @@ class ThinPlateSpline:
         control_points (Tensor): Control points fitted (X_c). Shape: (n_c, d_s)
     """
 
-    def __init__(self, alpha=0.0, device="cuda") -> None:
+    def __init__(self, alpha=0.0, device="cpu") -> None:
         self._fitted = False
         self.alpha = alpha
         self.device = torch.device(device)

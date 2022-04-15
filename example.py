@@ -70,7 +70,7 @@ def main_interpolation():
     X_plot = x_plot[:, None]
 
     # Fit the model and transform
-    tps = ThinPlateSpline(0.5, "cpu")
+    tps = ThinPlateSpline(0.5)
     y_pred = tps.fit(X_train, f(X_train)).transform(X_plot)[:, 0]
 
     # Plot everything
@@ -96,9 +96,8 @@ def main_surface_mapping():
     yy[0] *= 2
     yy[3] *= 2
     deform_xy = torch.stack([xx, yy], dim=2).reshape(-1, 2)
-    print(deform_xy)
 
-    tps = ThinPlateSpline(0.5, "cpu")
+    tps = ThinPlateSpline(0.5)
 
     # Fit the surfaces
     tps.fit(source_xy, deform_xy)

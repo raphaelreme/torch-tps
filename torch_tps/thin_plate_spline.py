@@ -132,7 +132,8 @@ class ThinPlateSpline:
             Tensor: The radial distance for each point to a control point (\\Phi(X))
                 Shape: (n, n_c)
         """
-        dist = torch.cdist(X, self.control_points)
+        # Don't use mm for euclid dist, lots of imprecision comes from it (Will be a bit slower)
+        dist = torch.cdist(X, self.control_points, compute_mode="donot_use_mm_for_euclid_dist")
         dist[dist == 0] = 1  # phi(r) = r^2 log(r) ->  (phi(0) = 0)
         return dist**2 * torch.log(dist)
 

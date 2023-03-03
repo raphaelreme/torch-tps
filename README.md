@@ -1,5 +1,7 @@
 # torch-tps
 
+[![Lint and Test](https://github.com/raphaelreme/torch-tps/actions/workflows/tests.yml/badge.svg)](https://github.com/raphaelreme/torch-tps/actions/workflows/tests.yml)
+
 Implementation of Thin Plate Spline.
 (See numpy implementation with thin-plate-spline library)
 

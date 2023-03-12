@@ -108,7 +108,7 @@ class ThinPlateSpline:
             Tensor: Mapped points in the target space
                 Shape: (n, d_t)
         """
-        assert self._fitted
+        assert self._fitted, "Please call fit first."
 
         X = X.to(self.device)
         X = _ensure_2d(X)
@@ -138,8 +138,15 @@ class ThinPlateSpline:
         return dist**2 * torch.log(dist)
 
 
-def _ensure_2d(arr: torch.Tensor) -> torch.Tensor:
-    """Ensure that we manipulate a 2d array"""
-    arr = torch.atleast_2d(arr)
-    assert arr.ndim == 2
-    return arr
+def _ensure_2d(tensor: torch.Tensor) -> torch.Tensor:
+    """Ensure that tensor is a 2d tensor
+
+    In case of 1d tensor, let's expand the last dim
+    """
+    assert tensor.ndim in (1, 2)
+
+    # Expand last dim in order to interpret this as (n, 1) points
+    if tensor.ndim == 1:
+        tensor = tensor[:, None]
+
+    return tensor

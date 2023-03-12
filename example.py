@@ -65,13 +65,9 @@ def main_interpolation():
     x_train = x_train[idx]
     y_train = f(x_train)
 
-    # create 2D-array versions of these arrays to feed to transformers
-    X_train = x_train[:, None]
-    X_plot = x_plot[:, None]
-
     # Fit the model and transform
     tps = ThinPlateSpline(0.5)
-    y_pred = tps.fit(X_train, f(X_train)).transform(X_plot)[:, 0]
+    y_pred = tps.fit(x_train, f(x_train)).transform(x_plot)[:, 0]
 
     # Plot everything
     plt.plot(x_plot.numpy(), f(x_plot).numpy(), label="ground truth")

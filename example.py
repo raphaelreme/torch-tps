@@ -82,7 +82,7 @@ def main_surface_mapping():
     Inspired from https://github.com/tzing/tps-deformation
     """
     samp = torch.linspace(-2, 2, 4)
-    xx, yy = torch.meshgrid(samp, samp)
+    xx, yy = torch.meshgrid(samp, samp, indexing="ij")
 
     # make source surface, get uniformed distributed control points
     source_xy = torch.stack([xx, yy], dim=2).reshape(-1, 2)

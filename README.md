@@ -3,7 +3,7 @@
 [![Lint and Test](https://github.com/raphaelreme/torch-tps/actions/workflows/tests.yml/badge.svg)](https://github.com/raphaelreme/torch-tps/actions/workflows/tests.yml)
 
 Implementation of Thin Plate Spline.
-(See numpy implementation with thin-plate-spline library)
+(See numpy implementation with [thin-plate-spline](https://github.com/raphaelreme/tps) library)
 
 
 ## Install
@@ -41,8 +41,18 @@ tps.fit(X_c, X_t)
 Y = tps.transform(X)
 ```
 
-Also have a look at `example.py`
+## Examples
 
+We provide different examples in the `example` folder. (From interpolation, to multidimensional cases and image warping).
+
+
+### Image warping
+
+The elastic deformation of TPS can be used for image warping. Here is an example of tps to increase/decrease the size of the center of the image or using random control points:
+
+![Input Image](example/images/dog_with_bbox.png)![Increased Image](example/images/increase_warped_dog.png)![Decreased Image](example/images/decrease_warped_dog.png)![Warped Image](example/images/random_warped_dog.png)
+
+Have a look at `example/image_warping.py`.
 
 ## Build and Deploy
 

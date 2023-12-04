@@ -92,7 +92,7 @@ class ThinPlateSpline:
 
         Y = torch.vstack([Y, torch.zeros((d_s + 1, Y.shape[1]), device=self.device)])
 
-        self.parameters = torch.linalg.solve(A, Y)
+        self.parameters = torch.linalg.solve(A, Y)  # pylint: disable=not-callable
         self._fitted = True
 
         return self

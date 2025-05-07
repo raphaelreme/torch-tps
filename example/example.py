@@ -20,29 +20,27 @@ def compute_time(f, n, *args, **kwargs):
 def main_timed():
     """Check time execution
 
-    (Also shows d_s != d_t)
+    Also shows d_s != d_t, and can be switch to cuda to see run time gains
     """
     device = torch.device("cpu")
-    # torch.linalg.solve isn't faster on cuda
-    # It seems that on cpu, it's still much more faster that numpy version
 
-    d_s = 3
-    d_t = 2
-    n_c = 800
-    n = 800
+    d = 3
+    v = 2
+    n = 1500
+    m = 5000
 
-    X_t = torch.normal(0, 2, (n_c, d_t), device=device)
-    X_c = torch.normal(0, 1, (n_c, d_s), device=device)
-    X = torch.normal(0, 1, (n, d_s), device=device)
+    X_train = torch.normal(0, 2, (n, d), device=device)
+    Y_train = torch.normal(0, 1, (n, v), device=device)
+    X_test = torch.normal(0, 1, (m, d), device=device)
 
-    tps = ThinPlateSpline(0.0, device)
+    tps = ThinPlateSpline(0.0, device=device)
 
-    fit_time = compute_time(tps.fit, 100, X_c, X_t)
-    transform_time = compute_time(tps.transform, 100, X)
+    fit_time = compute_time(tps.fit, 100, X_train, Y_train)
+    transform_time = compute_time(tps.transform, 100, X_test)
 
-    print(f"Control point number: {n_c}")
-    print(f"Transformed point number: {n}")
-    print(f"Source and target space dimension: {d_s} -> {d_t}")
+    print(f"Control point number: {n}")
+    print(f"Transformed point number: {m}")
+    print(f"Source and target space dimension: {d} -> {v}")
     print(f"Fit avg time: {fit_time}")
     print(f"Transform avg time: {transform_time}")
 

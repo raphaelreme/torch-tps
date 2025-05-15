@@ -25,9 +25,6 @@ $ pip install torch-tps
 
 ## Getting started
 
-
-## Getting started
-
 ```python
 import torch
 from torch_tps import ThinPlateSpline
@@ -85,16 +82,15 @@ $$
 
 Where:
 
-- G(r): radial basis function (RBF) (depends on `order` and the input dimension `d`)
-- P(x): a polynomial of degree `order - 1`
+- $G(r)$: radial basis function (RBF) (depends on `order` and the input dimension `d`)
+- $P(x)$: a polynomial of degree `order - 1`
 
 Default kernel (TPS):
-$$G(r) = r^2 \log(r)$$
+- $G(r) = r^2 \log(r)$
 
 General kernel:
-$$
-\begin{aligned} &G(r) = r^{(2 \text{order} - d)} & \text{ if d is odd}\\ &G(r) = r^{(2\text{order} - d)} \log(r) & \text{ otherwise}\end{aligned}
-$$
+- $G(r) = r^{(2 \text{order} - d)} \text{ if d is odd}$
+- $G(r) = r^{(2\text{order} - d)} \log(r) \text{ otherwise}$
 
 
 ## 🔧 API
@@ -128,8 +124,8 @@ Returns: `(n', v)` interpolated values
 ## Development
 
 ```bash
-git clone https://github.com/raphaelreme/tps.git
-cd tps
+git clone https://github.com/raphaelreme/torch-tps.git
+cd torch-tps
 pip install -e .
 ```
 

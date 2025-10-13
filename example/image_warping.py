@@ -125,8 +125,8 @@ def main():
     ii, jj = torch.meshgrid(i, j, indexing="ij")
     output_indices = torch.cat((ii[..., None], jj[..., None]), dim=-1)  # Shape (H, W, 2)
 
-    # Transform it into the input indices
-    input_indices = tps.transform(output_indices.reshape(-1, 2)).reshape(height, width, 2)
+    # Transform it into the input indices (flip is necessary because tps.transform operates on x,y coordinates, not i,j)
+    input_indices = tps.transform(output_indices.reshape(-1, 2).flip(-1)).flip(-1).reshape(height, width, 2)
 
     # Interpolate the resulting image
     grid = 2 * input_indices / size - 1  # Into [-1, 1]

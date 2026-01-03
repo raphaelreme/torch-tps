@@ -1,4 +1,4 @@
-# torch-tps
+# Torch-TPS (Thin Plate Spline)
 
 [![Lint and Test](https://github.com/raphaelreme/torch-tps/actions/workflows/tests.yml/badge.svg)](https://github.com/raphaelreme/torch-tps/actions/workflows/tests.yml)
 
@@ -23,6 +23,15 @@ This implementation is much faster than the NumPy one, thanks to the cpu //. Usi
 $ pip install torch-tps
 ```
 
+
+### From source
+
+```bash
+git clone git@github.com:raphaelreme/tps.git  # OR https://github.com/raphaelreme/tps.git
+cd tps
+pip install .
+```
+
 ## Getting started
 
 ```python
@@ -36,7 +45,7 @@ Y_train = torch.random.normal(0, 1, (800, 2))  # Values for each point (800 valu
 # New source points to interpolate
 X_test = torch.random.normal(0, 1, (3000, 3))
 
-# Initialize spline model (Regularization is controled with alpha parameter)
+# Initialize spline model (Regularization is controlled with alpha parameter)
 tps = ThinPlateSpline(alpha=0.5)  # Use device="cuda" to switch to gpu
 
 # Fit spline from control points
@@ -120,14 +129,6 @@ Applies the learned mapping to new input points.
 - **X**: `(n', d)` points
 
 Returns: `(n', v)` interpolated values
-
-## Development
-
-```bash
-git clone https://github.com/raphaelreme/torch-tps.git
-cd torch-tps
-pip install -e .
-```
 
 ## License
 

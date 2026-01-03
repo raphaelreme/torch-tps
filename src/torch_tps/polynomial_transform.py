@@ -1,13 +1,18 @@
-"""Polynomial transform adapted from scikit-learn"""
+"""Polynomial transform adapted from scikit-learn."""
+
+from __future__ import annotations
 
 from itertools import chain, combinations_with_replacement
-from typing import Iterable, Tuple
+from typing import TYPE_CHECKING
 
 import torch
 
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
 
 class PolynomialFeatures:
-    """Generate polynomial features
+    """Generate polynomial features.
 
     For each feature vector, it generates polynomial features of degree d consisting
     of all polynomial combinations of the features with degree less than or equal to
@@ -16,12 +21,12 @@ class PolynomialFeatures:
     For example, if an input sample is two dimensional and of the form
     [a, b], the degree-2 polynomial features are [1, a, b, a^2, ab, b^2].
 
-    With degree 1, it simply transform to homogenous coordinates (adding a constant 1 to the features)
+    With degree 1, it simply transform to homogenous coordinates (adding a constant 1 to the features).
 
     See PolynomialFeatures from scikit-learn for a complete documentation and implementation.
 
-    Contrary to sklearn implementation, we computes the full exponents matrix (d_p x d)
-    And exploits GPU a bit inefficiently to compute X_p (but much much faster than for loop with sparse memory access)
+    Contrary to the sklearn implementation, we compute the full exponent matrix (d_p x d)
+    and exploit GPU to compute X_p (inefficient but much faster than a for loop with sparse memory access).
     """
 
     def __init__(self, degree=1):
@@ -30,10 +35,10 @@ class PolynomialFeatures:
         self.exponents = torch.tensor([], dtype=torch.int32)
 
     @staticmethod
-    def _combinations(n_features: int, degree: int) -> Iterable[Tuple[int, ...]]:
+    def _combinations(n_features: int, degree: int) -> Iterable[tuple[int, ...]]:
         return chain.from_iterable(combinations_with_replacement(range(n_features), i) for i in range(degree + 1))
 
-    def fit(self, X: torch.Tensor):
+    def fit(self, X: torch.Tensor) -> PolynomialFeatures:
         """Compute number of output features."""
         _, n_features = X.shape
         combinations = list(self._combinations(n_features, self.degree))
@@ -46,18 +51,19 @@ class PolynomialFeatures:
         self._fitted = True
         return self
 
-    def transform(self, X: torch.Tensor):
-        """Transform features to polynomial features
+    def transform(self, X: torch.Tensor) -> torch.Tensor:
+        """Transform features to polynomial features.
 
         Args:
             X (torch.Tensor): Features for multiple samples
                 Shape: (n_samples, n_features)
 
-        Returns
+        Returns:
             torch.Tensor: Polynomial features
                 Shape: (n_samples, n_output_features)
         """
-        assert self._fitted, "Please first fit the PolynomialFeatures"
+        if not self._fitted:
+            raise RuntimeError("Please call `fit` before `transform`.")
 
         if X.shape[1] != self.exponents.shape[1]:
             raise ValueError("X shape does not match training shape")

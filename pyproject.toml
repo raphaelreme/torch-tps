@@ -109,3 +109,5 @@ check_untyped_defs = true
 
 [tool.pytest.ini_options]
 strict = true
+
+markers = ["cuda: requires CUDA."]

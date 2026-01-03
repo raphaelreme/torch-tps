@@ -31,7 +31,7 @@ Y_train = torch.random.normal(0, 1, (800, 2))  # Values for each point (800 valu
 # New source points to interpolate
 X_test = torch.random.normal(0, 1, (3000, 3))
 
-# Initialize spline model (Regularization is controled with alpha parameter)
+# Initialize spline model (Regularization is controlled with alpha parameter)
 tps = ThinPlateSpline(alpha=0.5)  # Use device="cuda" to switch to gpu
 
 # Fit spline from control points

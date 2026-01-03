@@ -111,3 +111,6 @@ check_untyped_defs = true
 strict = true
 
 markers = ["cuda: requires CUDA."]
+
+[tool.coverage.run]
+source = ["torch_tps"]

@@ -1,5 +1,10 @@
 # Torch-TPS (Thin Plate Spline)
 
+[![License](https://img.shields.io/github/license/raphaelreme/torch-tps)](https://github.com/raphaelreme/torch-tps/raw/main/LICENSE)
+[![PyPi](https://img.shields.io/pypi/v/torch-tps)](https://pypi.org/project/torch-tps/)
+[![Python](https://img.shields.io/pypi/pyversions/torch-tps)](https://pypi.org/project/torch-tps/)
+[![Downloads](https://img.shields.io/pypi/dm/torch-tps)](https://pypi.org/project/torch-tps/)
+[![Codecov](https://codecov.io/github/raphaelreme/torch-tps/graph/badge.svg?token=9124FUY5R5)](https://codecov.io/github/raphaelreme/torch-tps)
 [![Lint and Test](https://github.com/raphaelreme/torch-tps/actions/workflows/tests.yml/badge.svg)](https://github.com/raphaelreme/torch-tps/actions/workflows/tests.yml)
 
 PyTorch implementation of the generalized Polyharmonic Spline interpolation (also known as Thin Plate Spline in 2D). It learns a smooth elastic mapping between two Euclidean spaces with support for:

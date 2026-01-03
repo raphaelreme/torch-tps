@@ -32,8 +32,8 @@ $ pip install torch-tps
 ### From source
 
 ```bash
-git clone git@github.com:raphaelreme/tps.git  # OR https://github.com/raphaelreme/tps.git
-cd tps
+git clone git@github.com:raphaelreme/torch-tps.git  # OR https://github.com/raphaelreme/torch-tps.git
+cd torch-tps
 pip install .
 ```
 

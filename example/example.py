@@ -2,7 +2,7 @@ import time
 
 import matplotlib.pyplot as plt  # type: ignore[import-untyped]
 import torch
-import tqdm  # type: ignore[import-untyped]
+import tqdm
 
 from torch_tps import ThinPlateSpline
 
